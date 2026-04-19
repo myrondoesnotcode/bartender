@@ -1,7 +1,8 @@
 // ============================================================
 // CONFIGURATION — change PASSWORD to your actual password
 // ============================================================
-const PASSWORD = "bar2024";
+const PASSWORD = "1948";
+const SHEET_ID = "1sxsuNSTTMBNdubWfsVWRgEFqZ624rOUTosX7TTh4Nhw";
 
 // ============================================================
 // ROUTER
@@ -14,9 +15,14 @@ function doPost(e) {
   return handle(e);
 }
 
+function doOptions(e) {
+  return ContentService.createTextOutput("")
+    .setMimeType(ContentService.MimeType.TEXT);
+}
+
 function handle(e) {
   try {
-    const p = e.parameter;
+    const p = e.parameter || {};
     if (p.password !== PASSWORD) {
       return json({ error: "Unauthorized" });
     }
@@ -87,7 +93,7 @@ function addCustomer(account, name) {
 // GET BILLS FOR A MONTH
 // ============================================================
 function getBills(month) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   const sheet = ss.getSheetByName("Bills_" + month);
   if (!sheet) return { bills: [] };
   const data = sheet.getDataRange().getValues();
@@ -105,7 +111,7 @@ function getBills(month) {
 // LIST AVAILABLE MONTHS
 // ============================================================
 function getMonths() {
-  const months = SpreadsheetApp.getActiveSpreadsheet()
+  const months = SpreadsheetApp.openById(SHEET_ID)
     .getSheets()
     .map(s => s.getName())
     .filter(n => n.startsWith("Bills_"))
@@ -127,7 +133,7 @@ function getCurrentMonthTabName() {
 
 function getOrCreateMonthSheet(monthKey) {
   const tabName = "Bills_" + monthKey;
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(tabName);
   if (!sheet) {
     sheet = ss.insertSheet(tabName);
@@ -137,7 +143,7 @@ function getOrCreateMonthSheet(monthKey) {
 }
 
 function getOrCreateSheet(name) {
-  const ss = SpreadsheetApp.getActiveSpreadsheet();
+  const ss = SpreadsheetApp.openById(SHEET_ID);
   let sheet = ss.getSheetByName(name);
   if (!sheet) {
     sheet = ss.insertSheet(name);
