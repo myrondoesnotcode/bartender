@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bar Tab Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- LOGIN SCREEN -->
+  <section id="screen-login" class="screen active">
+    <div class="card center">
+      <h1>Bar Tab Manager</h1>
+      <input id="login-password" type="password" placeholder="Password" />
+      <button id="login-btn">Enter</button>
+      <p id="login-error" class="error hidden">Incorrect password</p>
+    </div>
+  </section>
+
+  <!-- BILLING SCREEN -->
+  <section id="screen-billing" class="screen hidden">
+    <nav class="tab-bar">
+      <button class="tab active" data-target="screen-billing">Submit Bill</button>
+      <button class="tab" data-target="screen-table">View Table</button>
+    </nav>
+    <div class="card">
+      <h2>Submit a Bill</h2>
+      <div class="field-row">
+        <input id="bill-account" type="text" placeholder="Account Number" autocomplete="off" />
+        <span id="bill-customer-name" class="customer-label"></span>
+      </div>
+      <div id="new-customer-row" class="hidden">
+        <p class="warning">Account not found. Enter customer name to add:</p>
+        <input id="bill-new-name" type="text" placeholder="Customer Name" />
+      </div>
+      <input id="bill-amount" type="number" placeholder="Amount (₪)" min="0" step="0.01" />
+      <input id="bill-description" type="text" placeholder="Description (optional)" />
+      <button id="bill-submit">Submit Bill</button>
+      <p id="bill-feedback" class="feedback hidden"></p>
+    </div>
+  </section>
+
+  <!-- TABLE SCREEN -->
+  <section id="screen-table" class="screen hidden">
+    <nav class="tab-bar">
+      <button class="tab" data-target="screen-billing">Submit Bill</button>
+      <button class="tab active" data-target="screen-table">View Table</button>
+    </nav>
+    <div class="card">
+      <div class="table-header">
+        <select id="month-selector"></select>
+        <button id="export-csv">Export CSV</button>
+        <a id="open-sheet" href="#" target="_blank">Open in Sheets ↗</a>
+      </div>
+      <div id="bills-table-container">
+        <p class="loading">Loading...</p>
+      </div>
+    </div>
+  </section>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
