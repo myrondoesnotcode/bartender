@@ -44,8 +44,8 @@ function lookupCustomer(account) {
   for (let i = 1; i < data.length; i++) {
     if (String(data[i][0]) === String(account)) {
       const name = data[i][1];
-      const balance = computeBalance(account);
-      return { found: true, name, balance };
+      const { credits, balance } = computeBalance(account);
+      return { found: true, name, totalCredits: credits, balance };
     }
   }
   return { found: false };
@@ -63,7 +63,7 @@ function computeBalance(account) {
       d.slice(1).forEach(row => { if (String(row[0]) === String(account)) spent += parseInt(row[2]) || 0; });
     }
   });
-  return credits - spent;
+  return { credits, spent, balance: credits - spent };
 }
 
 // ============================================================
