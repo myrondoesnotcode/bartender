@@ -17,7 +17,7 @@
   --green:#1e8a5e;--green-dim:rgba(30,138,94,0.1);
   --red:#c0392b;--red-dim:rgba(192,57,43,0.1);
   --blue:#2563eb;--blue-dim:rgba(37,99,235,0.1);
-  --nav-h:54px;--order-bar-h:54px;--r:10px;--r-sm:7px;
+  --nav-h:54px;--r:10px;--r-sm:7px;
 }
 html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(--text);
   font-family:'Barlow',system-ui,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased}
@@ -56,8 +56,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   background:var(--surf);border-bottom:1px solid var(--border)}
 .nav-btn{flex:1;display:flex;align-items:center;justify-content:center;gap:5px;
   background:none;border:none;color:var(--text2);font-family:'Barlow',sans-serif;
-  font-size:.75rem;font-weight:600;cursor:pointer;position:relative;transition:color .15s;
-  padding:0 4px}
+  font-size:.78rem;font-weight:600;cursor:pointer;position:relative;transition:color .15s}
 .nav-btn svg{width:16px;height:16px;flex-shrink:0}
 .nav-btn.active{color:var(--gold)}
 .nav-btn.active::after{content:'';position:absolute;bottom:0;left:15%;right:15%;
@@ -90,75 +89,6 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   font-family:'Barlow',sans-serif;font-size:.9rem;outline:none;transition:border-color .15s}
 .new-name-input:focus{border-color:var(--gold)}
 
-/* DRINKS GRID — 2 large cards */
-.drinks-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
-.drinks-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;padding:14px}
-.drink-card{background:var(--surf);border:1.5px solid var(--border2);border-radius:var(--r);
-  padding:24px 10px 20px;display:flex;flex-direction:column;align-items:center;
-  justify-content:center;gap:6px;text-align:center;cursor:pointer;min-height:110px;
-  position:relative;user-select:none;-webkit-user-select:none;
-  box-shadow:0 1px 4px rgba(0,0,0,0.06);
-  transition:background .12s,border-color .12s,transform .08s}
-.drink-card:active{transform:scale(.93);background:var(--gold-dim);border-color:var(--gold)}
-.drink-card.has-items{border-color:var(--gold);background:var(--gold-dim)}
-.drink-name{font-family:'Barlow Condensed',sans-serif;font-size:1.25rem;font-weight:700;
-  color:var(--text);line-height:1.2}
-.drink-price{font-size:.82rem;font-weight:600;color:var(--gold)}
-.drink-badge{position:absolute;top:-8px;right:-8px;width:24px;height:24px;
-  background:var(--gold);color:#fff;border-radius:50%;
-  font-family:'Barlow Condensed',sans-serif;font-size:.8rem;font-weight:800;
-  display:flex;align-items:center;justify-content:center;
-  box-shadow:0 2px 8px rgba(201,144,58,.4)}
-
-/* ORDER PANEL */
-.order-panel{flex-shrink:0;background:var(--surf);border-top:1.5px solid var(--border2);
-  overflow:hidden;max-height:65vh;transition:max-height .3s cubic-bezier(.4,0,.2,1)}
-.order-panel.collapsed{max-height:var(--order-bar-h)}
-.order-bar{height:var(--order-bar-h);display:flex;align-items:center;
-  padding:0 14px;gap:10px;cursor:pointer;flex-shrink:0}
-.order-bar-left{display:flex;align-items:center;gap:8px}
-.order-badge{display:inline-flex;align-items:center;justify-content:center;
-  min-width:26px;height:26px;padding:0 6px;background:var(--gold);color:#fff;
-  border-radius:13px;font-family:'Barlow Condensed',sans-serif;font-size:.92rem;font-weight:800}
-.order-bar-label{font-size:.82rem;color:var(--text2)}
-.order-bar-right{margin-left:auto;display:flex;align-items:center;gap:8px}
-.order-total{font-family:'Barlow Condensed',sans-serif;font-size:1.45rem;font-weight:700;color:var(--text)}
-.chevron{width:18px;height:18px;color:var(--text2);transition:transform .3s ease;flex-shrink:0}
-.order-panel:not(.collapsed) .chevron{transform:rotate(180deg)}
-.order-body{overflow-y:auto;-webkit-overflow-scrolling:touch;max-height:calc(65vh - var(--order-bar-h))}
-.order-items{padding:6px 14px 0;display:flex;flex-direction:column}
-.order-empty{font-size:.82rem;color:var(--text3);text-align:center;padding:12px 0 8px}
-.order-item{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px solid var(--border)}
-.order-item:last-child{border-bottom:none}
-.oi-name{flex:1;font-size:.88rem;min-width:0}
-.oi-qty{display:flex;align-items:center;gap:5px}
-.qty-btn{width:26px;height:26px;background:var(--surf2);border:1px solid var(--border2);
-  border-radius:5px;color:var(--text);font-size:1rem;cursor:pointer;
-  display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.oi-qty-num{font-size:.88rem;min-width:16px;text-align:center}
-.oi-price{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:600;
-  color:var(--gold);min-width:52px;text-align:right}
-.oi-remove{background:none;border:none;color:var(--text3);font-size:1rem;
-  cursor:pointer;padding:0 2px;transition:color .15s;flex-shrink:0}
-.oi-remove:active{color:var(--red)}
-.order-foot{padding:10px 14px 14px;display:flex;flex-direction:column;gap:8px;
-  border-top:1px solid var(--border)}
-.note-input{width:100%;padding:8px 10px;background:var(--surf2);
-  border:1.5px solid var(--border);border-radius:var(--r-sm);color:var(--text);
-  font-family:'Barlow',sans-serif;font-size:.88rem;outline:none;transition:border-color .15s}
-.note-input:focus{border-color:var(--gold)}
-.note-input::placeholder{color:var(--text3)}
-.submit-btn{width:100%;padding:13px;background:var(--gold);border:none;
-  border-radius:var(--r);color:#fff;font-family:'Barlow Condensed',sans-serif;
-  font-size:1.05rem;font-weight:700;letter-spacing:.1em;cursor:pointer;
-  box-shadow:0 4px 20px rgba(201,144,58,.2);transition:opacity .15s,transform .1s}
-.submit-btn:active{opacity:.82;transform:scale(.98)}
-.submit-btn:disabled{opacity:.35;cursor:not-allowed;transform:none}
-.bill-feedback{text-align:center;font-size:.82rem;padding:7px 10px;border-radius:var(--r-sm)}
-.bill-feedback.success{background:var(--green-dim);color:var(--green);border:1px solid rgba(30,138,94,.25)}
-.bill-feedback.error{background:var(--red-dim);color:var(--red);border:1px solid rgba(192,57,43,.25)}
-.bill-feedback.hidden{display:none}
-
 /* CREDITS SCREEN */
 .credits-body{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px 12px}
 .credits-section{background:var(--surf);border-radius:var(--r);
@@ -175,49 +105,43 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   color:var(--text);line-height:1}
 .pkg-unit{font-size:.65rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text3)}
 .pkg-price{font-size:.92rem;font-weight:600;color:var(--gold);margin-top:2px}
-.credits-submit-btn{width:100%;padding:13px;background:var(--blue);border:none;
+.credits-submit-btn{width:100%;padding:13px;background:var(--gold);border:none;
   border-radius:var(--r);color:#fff;font-family:'Barlow Condensed',sans-serif;
   font-size:1.05rem;font-weight:700;letter-spacing:.1em;cursor:pointer;
   transition:opacity .15s,transform .1s}
 .credits-submit-btn:active{opacity:.82;transform:scale(.98)}
 .credits-submit-btn:disabled{opacity:.35;cursor:not-allowed}
+.bill-feedback{text-align:center;font-size:.82rem;padding:7px 10px;border-radius:var(--r-sm)}
+.bill-feedback.success{background:var(--green-dim);color:var(--green);border:1px solid rgba(30,138,94,.25)}
+.bill-feedback.error{background:var(--red-dim);color:var(--red);border:1px solid rgba(192,57,43,.25)}
+.bill-feedback.hidden{display:none}
 
-/* TABLE SCREEN */
+/* BILLS TABLE SCREEN */
 #screen-table{overflow:hidden}
 .table-controls{flex-shrink:0;display:flex;align-items:center;gap:8px;
   padding:10px 12px;background:var(--surf);border-bottom:1px solid var(--border)}
 .month-select{flex:1;padding:7px 10px;background:var(--surf2);
   border:1.5px solid var(--border2);border-radius:var(--r-sm);color:var(--text);
   font-family:'Barlow',sans-serif;font-size:.88rem;outline:none}
-.table-actions{display:flex;gap:6px}
-.tbl-btn{padding:7px 12px;background:var(--gold);border:none;border-radius:var(--r-sm);
-  color:#fff;font-family:'Barlow',sans-serif;font-size:.78rem;font-weight:600;
-  cursor:pointer;white-space:nowrap;text-decoration:none;
-  display:inline-flex;align-items:center;transition:opacity .15s}
-.tbl-btn:active{opacity:.8}
-.tbl-btn-outline{background:none;border:1.5px solid var(--border2);color:var(--text2)}
+.tbl-btn{padding:7px 12px;background:none;border:1.5px solid var(--border2);
+  border-radius:var(--r-sm);color:var(--text2);font-family:'Barlow',sans-serif;
+  font-size:.78rem;font-weight:600;cursor:pointer;white-space:nowrap;
+  text-decoration:none;display:inline-flex;align-items:center;transition:opacity .15s}
 .bills-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .bills-container{padding:10px}
 .tbl-msg{text-align:center;color:var(--text2);padding:3rem;font-size:.88rem}
 .bills-tbl{width:100%;border-collapse:collapse}
-.bills-tbl th{padding:6px 8px;text-align:left;font-size:.65rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--text3);border-bottom:1px solid var(--border2)}
-.grp-row{cursor:pointer}
-.grp-row td{padding:10px 8px;border-bottom:1px solid var(--border);font-size:.88rem}
-.grp-row:hover td{background:var(--surf2)}
+.bills-tbl th{padding:8px;text-align:left;font-size:.65rem;font-weight:700;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--text3);
+  border-bottom:1px solid var(--border2)}
+.bills-tbl td{padding:11px 8px;border-bottom:1px solid var(--border);font-size:.88rem}
+.bills-tbl tr:last-child td{border-bottom:none}
 .acct-num{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--gold)}
-.acct-total{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700}
-.expand-ico{color:var(--text3);font-size:.7rem;transition:transform .2s}
-.grp-row.open .expand-ico{transform:rotate(90deg)}
-.det-row{display:none}
-.det-row.visible{display:table-row}
-.det-row td{padding:6px 8px 6px 20px;font-size:.8rem;color:var(--text2);
-  border-bottom:1px solid var(--border);background:var(--surf2)}
-.det-row.voided td{opacity:.5;text-decoration:line-through}
-.void-btn{background:none;border:1px solid rgba(192,57,43,.3);border-radius:4px;
-  color:var(--red);font-size:.7rem;padding:2px 6px;cursor:pointer;
-  transition:all .15s;white-space:nowrap}
-.void-btn:hover{background:var(--red-dim)}
+.tix-total{font-family:'Barlow Condensed',sans-serif;font-size:1rem;font-weight:700;color:var(--text)}
+.tbl-summary{flex-shrink:0;padding:10px 12px;background:var(--surf);
+  border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
+.tbl-summary-label{font-size:.75rem;color:var(--text2)}
+.tbl-summary-val{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700}
   </style>
 </head>
 <body>
@@ -237,69 +161,16 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   </div>
 </div>
 
-<!-- BILLING -->
-<div class="screen" id="screen-billing">
-  <nav class="app-nav">
-    <button class="nav-btn active" data-target="screen-billing">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-      Bill
-    </button>
-    <button class="nav-btn" data-target="screen-credits">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Credits
-    </button>
-  </nav>
-  <div class="account-bar">
-    <div class="account-row">
-      <div class="account-field">
-        <label class="field-label">Account #</label>
-        <input id="bill-account" type="tel" placeholder="—" autocomplete="off" class="account-input" />
-      </div>
-      <div class="customer-name-area" id="customer-display">
-        <span class="cust-placeholder">Enter an account number</span>
-      </div>
-    </div>
-    <div class="new-customer-row hidden" id="new-customer-row">
-      <input id="bill-new-name" type="text" placeholder="Customer name (new — will be saved)" class="new-name-input" />
-    </div>
-  </div>
-  <div class="drinks-scroll">
-    <div class="drinks-grid" id="drinks-grid"></div>
-  </div>
-  <div class="order-panel collapsed" id="order-panel">
-    <div class="order-bar" id="order-bar">
-      <div class="order-bar-left">
-        <span class="order-badge" id="order-count">0</span>
-        <span class="order-bar-label">items in order</span>
-      </div>
-      <div class="order-bar-right">
-        <strong class="order-total" id="order-total">0 tix</strong>
-        <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="18 15 12 9 6 15"/></svg>
-      </div>
-    </div>
-    <div class="order-body">
-      <div class="order-items" id="order-items">
-        <p class="order-empty">No drinks added yet — tap any drink above</p>
-      </div>
-      <div class="order-foot">
-        <input id="bill-description" type="text" placeholder="Add a note (optional)" class="note-input" />
-        <button id="bill-submit" class="submit-btn">Submit Bill</button>
-        <div id="bill-feedback" class="bill-feedback hidden"></div>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- CREDITS -->
 <div class="screen" id="screen-credits">
   <nav class="app-nav">
-    <button class="nav-btn" data-target="screen-billing">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/></svg>
-      Bill
-    </button>
     <button class="nav-btn active" data-target="screen-credits">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
       Credits
+    </button>
+    <button class="nav-btn" data-target="screen-table">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+      Bills
     </button>
   </nav>
   <div class="account-bar">
@@ -337,6 +208,32 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   </div>
 </div>
 
+<!-- BILLS TABLE -->
+<div class="screen" id="screen-table">
+  <nav class="app-nav">
+    <button class="nav-btn" data-target="screen-credits">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      Credits
+    </button>
+    <button class="nav-btn active" data-target="screen-table">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
+      Bills
+    </button>
+  </nav>
+  <div class="table-controls">
+    <select id="month-selector" class="month-select"></select>
+    <a id="open-sheet" href="#" target="_blank" class="tbl-btn">Sheets ↗</a>
+  </div>
+  <div class="bills-scroll">
+    <div id="bills-table-container" class="bills-container">
+      <p class="tbl-msg">Loading...</p>
+    </div>
+  </div>
+  <div class="tbl-summary">
+    <span class="tbl-summary-label">Total tickets this month</span>
+    <span class="tbl-summary-val" id="tbl-total">—</span>
+  </div>
+</div>
 
 <script>
 // ── CONFIG ────────────────────────────────────────────────
@@ -344,22 +241,13 @@ const CONFIG = {
   APPS_SCRIPT_URL: "https://script.google.com/macros/s/AKfycbw2PKkSRFJ_GRXiTVNGQ2OuqSBeZylVoLZVN1wrcaKqDoT7XNfXd5kK13Ch1WBwox2B/exec",
   SHEET_ID: "1sxsuNSTTMBNdubWfsVWRgEFqZ624rOUTosX7TTh4Nhw",
   PASSWORD: "1948",
-  DRINKS: [
-    {id:"beer", name:"Beer",  tickets:2},
-    {id:"wine", name:"Wine",  tickets:3},
-  ],
-  PACKAGES: [
-    {tickets:5,  amount:30},
-    {tickets:10, amount:50},
-  ],
 };
 
 // ── STATE ─────────────────────────────────────────────────
-let currentOrder   = [];
-let orderOpen      = false;
-let billingReady   = false;
-let creditsReady   = false;
-let selectedPkgEl  = null;
+let creditsReady = false;
+let tableReady   = false;
+let currentMonth = "";
+let selectedPkgEl = null;
 
 // ── SCREENS ───────────────────────────────────────────────
 function showScreen(id) {
@@ -387,8 +275,8 @@ function login() {
   err.classList.remove("visible");
   if (pw === CONFIG.PASSWORD) {
     sessionStorage.setItem("password", pw);
-    showScreen("screen-billing");
-    initBilling();
+    showScreen("screen-credits");
+    initCredits();
   } else {
     err.classList.add("visible");
   }
@@ -400,26 +288,14 @@ function initNav() {
     btn.addEventListener("click", () => {
       const t = btn.dataset.target;
       showScreen(t);
-      if (t === "screen-billing") initBilling();
       if (t === "screen-credits") initCredits();
+      if (t === "screen-table")   initTable();
     });
   });
 }
 
-// ── BILLING ───────────────────────────────────────────────
+// ── ACCOUNT LOOKUP ────────────────────────────────────────
 let lookupTimer = null;
-
-function initBilling() {
-  if (billingReady) return;
-  billingReady = true;
-  renderDrinks();
-  document.getElementById("bill-account").addEventListener("input", e => {
-    clearTimeout(lookupTimer);
-    lookupTimer = setTimeout(() => lookup(e.target.value.trim(), "customer-display", "new-customer-row"), 380);
-  });
-  document.getElementById("order-bar").addEventListener("click", toggleOrder);
-  document.getElementById("bill-submit").addEventListener("click", submitBill);
-}
 
 async function lookup(account, displayId, newRowId) {
   const display = document.getElementById(displayId);
@@ -433,8 +309,8 @@ async function lookup(account, displayId, newRowId) {
   try {
     const r = await api({action:"lookup", account});
     if (r.found) {
-      const bal = r.balance ?? 0;
       const total = r.totalCredits ?? 0;
+      const bal   = r.balance ?? 0;
       const balClass = bal > 5 ? "ok" : bal > 0 ? "low" : "zero";
       display.innerHTML = `
         <span class="cust-found">${r.name}</span>
@@ -449,132 +325,13 @@ async function lookup(account, displayId, newRowId) {
   }
 }
 
-// ── DRINKS GRID ───────────────────────────────────────────
-function renderDrinks() {
-  const grid = document.getElementById("drinks-grid");
-  grid.innerHTML = "";
-  CONFIG.DRINKS.forEach(drink => {
-    const inOrder = currentOrder.find(o => o.drink.id === drink.id);
-    const card = document.createElement("div");
-    card.className = "drink-card" + (inOrder ? " has-items" : "");
-    card.innerHTML = `
-      ${inOrder ? `<span class="drink-badge">${inOrder.qty}</span>` : ""}
-      <span class="drink-name">${drink.name}</span>
-      <span class="drink-price">${drink.tickets} tickets</span>`;
-    card.addEventListener("click", () => addDrink(drink));
-    grid.appendChild(card);
-  });
-}
-
-function addDrink(drink) {
-  const existing = currentOrder.find(o => o.drink.id === drink.id);
-  if (existing) { existing.qty++; }
-  else {
-    currentOrder.push({drink, qty:1});
-    if (currentOrder.length === 1) { orderOpen = true; document.getElementById("order-panel").classList.remove("collapsed"); }
-  }
-  syncOrder();
-  renderDrinks();
-}
-
-function toggleOrder() {
-  orderOpen = !orderOpen;
-  document.getElementById("order-panel").classList.toggle("collapsed", !orderOpen);
-}
-
-function syncOrder() {
-  const totalTix = currentOrder.reduce((s,o) => s + o.drink.tickets * o.qty, 0);
-  const count    = currentOrder.reduce((s,o) => s + o.qty, 0);
-  document.getElementById("order-count").textContent = count;
-  document.getElementById("order-total").textContent = `${totalTix} tix`;
-
-  const box = document.getElementById("order-items");
-  if (!currentOrder.length) {
-    box.innerHTML = '<p class="order-empty">No drinks added yet — tap any drink above</p>';
-    return;
-  }
-  box.innerHTML = "";
-  currentOrder.forEach((o, i) => {
-    const row = document.createElement("div");
-    row.className = "order-item";
-    row.innerHTML = `
-      <span class="oi-name">${o.drink.name}</span>
-      <div class="oi-qty">
-        <button class="qty-btn" onclick="changeQty(${i},-1)">−</button>
-        <span class="oi-qty-num">${o.qty}</span>
-        <button class="qty-btn" onclick="changeQty(${i},1)">+</button>
-      </div>
-      <span class="oi-price">${o.drink.tickets * o.qty} tix</span>
-      <button class="oi-remove" onclick="removeItem(${i})">✕</button>`;
-    box.appendChild(row);
-  });
-}
-
-function changeQty(i, delta) {
-  currentOrder[i].qty += delta;
-  if (currentOrder[i].qty <= 0) currentOrder.splice(i, 1);
-  syncOrder(); renderDrinks();
-}
-
-function removeItem(i) {
-  currentOrder.splice(i, 1);
-  syncOrder(); renderDrinks();
-}
-
-// ── SUBMIT BILL ───────────────────────────────────────────
-async function submitBill() {
-  const account = document.getElementById("bill-account").value.trim();
-  const newName = document.getElementById("bill-new-name").value.trim();
-  const note    = document.getElementById("bill-description").value.trim();
-  const isNew   = !document.getElementById("new-customer-row").classList.contains("hidden");
-  const fb      = document.getElementById("bill-feedback");
-
-  if (!account)             return showFeedback(fb, "Please enter an account number.", "error");
-  if (!currentOrder.length) return showFeedback(fb, "Add at least one drink first.", "error");
-  if (isNew && !newName)    return showFeedback(fb, "Enter the customer name to add them.", "error");
-
-  const totalTix  = currentOrder.reduce((s,o) => s + o.drink.tickets * o.qty, 0);
-  const autoDesc  = currentOrder.map(o => o.qty > 1 ? `${o.drink.name} ×${o.qty}` : o.drink.name).join(", ");
-  const desc      = note ? `${autoDesc} — ${note}` : autoDesc;
-
-  const btn = document.getElementById("bill-submit");
-  btn.disabled = true; btn.textContent = "Submitting…";
-
-  try {
-    await api({action: isNew ? "addAndBill" : "bill", account, amount: totalTix, desc, name: newName});
-    showFeedback(fb, `✓ ${totalTix} tickets charged`, "success");
-    resetBillingForm();
-  } catch(err) {
-    showFeedback(fb, "Error: " + err.message, "error");
-  } finally {
-    btn.disabled = false; btn.textContent = "Submit Bill";
-  }
-}
-
-function showFeedback(el, msg, type) {
-  el.textContent = msg;
-  el.className = "bill-feedback " + type;
-  setTimeout(() => el.classList.add("hidden"), 4500);
-}
-
-function resetBillingForm() {
-  ["bill-account","bill-new-name","bill-description"].forEach(id => document.getElementById(id).value = "");
-  document.getElementById("customer-display").innerHTML = '<span class="cust-placeholder">Enter an account number</span>';
-  document.getElementById("new-customer-row").classList.add("hidden");
-  currentOrder = []; orderOpen = false;
-  document.getElementById("order-panel").classList.add("collapsed");
-  syncOrder(); renderDrinks();
-}
-
 // ── CREDITS ───────────────────────────────────────────────
-let credLookupTimer = null;
-
 function initCredits() {
   if (creditsReady) return;
   creditsReady = true;
   document.getElementById("cred-account").addEventListener("input", e => {
-    clearTimeout(credLookupTimer);
-    credLookupTimer = setTimeout(() => lookup(e.target.value.trim(), "cred-customer-display", "cred-new-customer-row"), 380);
+    clearTimeout(lookupTimer);
+    lookupTimer = setTimeout(() => lookup(e.target.value.trim(), "cred-customer-display", "cred-new-customer-row"), 380);
   });
   document.getElementById("cred-submit").addEventListener("click", submitCredits);
 }
@@ -591,8 +348,8 @@ async function submitCredits() {
   const isNew   = !document.getElementById("cred-new-customer-row").classList.contains("hidden");
   const fb      = document.getElementById("cred-feedback");
 
-  if (!account)        return showFeedback(fb, "Please enter an account number.", "error");
-  if (!selectedPkgEl)  return showFeedback(fb, "Select a package first.", "error");
+  if (!account)          return showFeedback(fb, "Please enter an account number.", "error");
+  if (!selectedPkgEl)    return showFeedback(fb, "Select a package first.", "error");
   if (isNew && !newName) return showFeedback(fb, "Enter the customer name to add them.", "error");
 
   const tickets = parseInt(selectedPkgEl.dataset.tickets);
@@ -602,9 +359,7 @@ async function submitCredits() {
   btn.disabled = true; btn.textContent = "Loading…";
 
   try {
-    if (isNew) {
-      await api({action:"addAndBill", account, amount:0, desc:"New customer", name:newName});
-    }
+    if (isNew) await api({action:"addAndBill", account, amount:0, desc:"New customer", name:newName});
     await api({action:"addCredits", account, name:newName, tickets, shekelAmount:amount});
     showFeedback(fb, `✓ ${tickets} tickets added (₪${amount})`, "success");
     document.getElementById("cred-account").value = "";
@@ -613,6 +368,7 @@ async function submitCredits() {
     document.getElementById("cred-new-customer-row").classList.add("hidden");
     document.querySelectorAll(".pkg-btn").forEach(b => b.classList.remove("selected"));
     selectedPkgEl = null;
+    tableReady = false;
   } catch(err) {
     showFeedback(fb, "Error: " + err.message, "error");
   } finally {
@@ -620,6 +376,93 @@ async function submitCredits() {
   }
 }
 
+function showFeedback(el, msg, type) {
+  el.textContent = msg;
+  el.className = "bill-feedback " + type;
+  setTimeout(() => el.classList.add("hidden"), 4500);
+}
+
+// ── BILLS TABLE ───────────────────────────────────────────
+async function initTable() {
+  if (tableReady) return;
+  tableReady = true;
+  await loadMonths();
+  if (currentMonth) await loadTable(currentMonth);
+  document.getElementById("month-selector").addEventListener("change", e => loadTable(e.target.value));
+}
+
+async function loadMonths() {
+  const sel = document.getElementById("month-selector");
+  sel.innerHTML = "";
+  try {
+    const {months} = await api({action:"getMonths"});
+    if (!months.length) { sel.innerHTML = '<option value="">No data yet</option>'; return; }
+    months.forEach(m => {
+      const o = document.createElement("option");
+      o.value = m; o.textContent = fmtMonth(m); sel.appendChild(o);
+    });
+    currentMonth = months[0];
+    document.getElementById("open-sheet").href =
+      `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/edit`;
+  } catch { sel.innerHTML = '<option value="">Error loading</option>'; }
+}
+
+function fmtMonth(key) {
+  const [y,m] = key.split("_");
+  return new Date(+y, +m-1, 1).toLocaleString("default", {month:"long", year:"numeric"});
+}
+
+async function loadTable(month) {
+  currentMonth = month;
+  const box = document.getElementById("bills-table-container");
+  box.innerHTML = '<p class="tbl-msg">Loading…</p>';
+  document.getElementById("tbl-total").textContent = "—";
+  try {
+    const {credits} = await api({action:"getCredits", month});
+    renderTable(credits);
+  } catch(err) {
+    box.innerHTML = `<p class="tbl-msg" style="color:var(--red)">Failed: ${err.message}</p>`;
+  }
+}
+
+function renderTable(credits) {
+  const box = document.getElementById("bills-table-container");
+  if (!credits.length) { box.innerHTML = '<p class="tbl-msg">No credits loaded this month.</p>'; return; }
+
+  // Group by account, sum tickets
+  const groups = {};
+  credits.forEach(c => {
+    if (!groups[c.account]) groups[c.account] = {name: c.name, tickets: 0, amount: 0};
+    groups[c.account].tickets += parseInt(c.tickets) || 0;
+    groups[c.account].amount  += parseFloat(c.amount) || 0;
+  });
+
+  const totalTix = Object.values(groups).reduce((s, g) => s + g.tickets, 0);
+  document.getElementById("tbl-total").textContent = totalTix + " tix";
+
+  const tbl = document.createElement("table");
+  tbl.className = "bills-tbl";
+  tbl.innerHTML = `<thead><tr>
+    <th>Acct</th><th>Name</th><th>Tickets</th><th>Paid</th>
+  </tr></thead>`;
+  const tbody = document.createElement("tbody");
+
+  Object.entries(groups)
+    .sort(([a],[b]) => String(a).localeCompare(String(b)))
+    .forEach(([acct, g]) => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td><span class="acct-num">${acct}</span></td>
+        <td dir="rtl" style="text-align:left">${g.name}</td>
+        <td><span class="tix-total">${g.tickets}</span></td>
+        <td style="color:var(--text2)">₪${g.amount.toFixed(0)}</td>`;
+      tbody.appendChild(tr);
+    });
+
+  tbl.appendChild(tbody);
+  box.innerHTML = "";
+  box.appendChild(tbl);
+}
 
 // ── BOOT ──────────────────────────────────────────────────
 document.addEventListener("DOMContentLoaded", () => {
@@ -629,8 +472,8 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   initNav();
   if (sessionStorage.getItem("password") === CONFIG.PASSWORD) {
-    showScreen("screen-billing");
-    initBilling();
+    showScreen("screen-credits");
+    initCredits();
   }
 });
 </script>
