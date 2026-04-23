@@ -16,7 +16,8 @@ function handle(e) {
     const p = e.parameter || {};
     if (p.password !== PASSWORD) return json({ error: "Unauthorized" });
     switch (p.action) {
-      case "lookup":      return json(lookupCustomer(p.account));
+      case "lookup":        return json(lookupCustomer(p.account));
+      case "getCustomers":  return json(getAllCustomers());
       case "bill":        return json(submitBill(p.account, p.name, p.amount, p.desc));
       case "addAndBill":  return json(addAndBill(p.account, p.name, p.amount, p.desc));
       case "getBills":    return json(getBills(p.month));
@@ -35,6 +36,19 @@ function handle(e) {
 
 function json(data) {
   return ContentService.createTextOutput(JSON.stringify(data)).setMimeType(ContentService.MimeType.JSON);
+}
+
+// ============================================================
+// GET ALL CUSTOMERS — called once on login to preload into JS
+// ============================================================
+function getAllCustomers() {
+  const sheet = getOrCreateSheet("Customers");
+  const data = sheet.getDataRange().getValues();
+  const customers = {};
+  for (var i = 1; i < data.length; i++) {
+    if (data[i][0]) customers[String(data[i][0])] = data[i][1];
+  }
+  return { customers: customers };
 }
 
 // ============================================================

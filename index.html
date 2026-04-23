@@ -323,6 +323,7 @@ let creditsReady = false;
 let tableReady   = false;
 let currentMonth = "";
 let selectedPkgEl = null;
+let CUSTOMERS = {}; // preloaded on login: {account -> name}
 
 // ── SCREENS ───────────────────────────────────────────────
 function showScreen(id) {
@@ -351,6 +352,7 @@ function login() {
   if (pw === CONFIG.PASSWORD) {
     sessionStorage.setItem("password", pw);
     showScreen("screen-credits");
+    api({action:"getCustomers"}).then(r => { CUSTOMERS = r.customers || {}; }).catch(()=>{});
     initCredits();
   } else {
     err.classList.add("visible");
@@ -373,30 +375,21 @@ function initNav() {
 // ── ACCOUNT LOOKUP ────────────────────────────────────────
 let lookupTimer = null;
 
-async function lookup(account, displayId, newRowId) {
+function lookup(account, displayId, newRowId) {
   const display = document.getElementById(displayId);
   const newRow  = document.getElementById(newRowId);
   if (!account) {
-    display.innerHTML = '<span class="cust-placeholder">Enter an account number</span>';
+    display.innerHTML = '<span class="cust-placeholder">הכנס מספר חשבון</span>';
     newRow.classList.add("hidden");
     return;
   }
-  display.innerHTML = '<span class="cust-loading">מחפש…</span>';
-  try {
-    const r = await api({action:"lookup", account});
-    if (r.found) {
-      const total = r.totalCredits ?? 0;
-      const bal   = r.balance ?? 0;
-      display.innerHTML = `
-        <span class="cust-found">${r.name}</span>
-        <span class="cust-balance ok">${total} כרטיסים נרכשו</span>`;
-      newRow.classList.add("hidden");
-    } else {
-      display.innerHTML = '<span class="cust-not-found">חשבון לא נמצא</span>';
-      newRow.classList.remove("hidden");
-    }
-  } catch {
-    display.innerHTML = '<span class="cust-not-found">שגיאת חיפוש</span>';
+  const name = CUSTOMERS[String(account)];
+  if (name) {
+    display.innerHTML = `<span class="cust-found">${name}</span>`;
+    newRow.classList.add("hidden");
+  } else {
+    display.innerHTML = '<span class="cust-not-found">חשבון לא נמצא</span>';
+    newRow.classList.remove("hidden");
   }
 }
 
@@ -405,8 +398,7 @@ function initCredits() {
   if (creditsReady) return;
   creditsReady = true;
   document.getElementById("cred-account").addEventListener("input", e => {
-    clearTimeout(lookupTimer);
-    lookupTimer = setTimeout(() => lookup(e.target.value.trim(), "cred-customer-display", "cred-new-customer-row"), 380);
+    lookup(e.target.value.trim(), "cred-customer-display", "cred-new-customer-row");
   });
   document.getElementById("cred-submit").addEventListener("click", submitCredits);
 }
@@ -571,7 +563,7 @@ function initHistory() {
     clearTimeout(histLookupTimer);
     const val = e.target.value.trim();
     histLookupTimer = setTimeout(async () => {
-      await lookup(val, "hist-customer-display", "hist-new-customer-row");
+      lookup(val, "hist-customer-display", "hist-new-customer-row");
       if (val) await loadPersonHistory(val);
       else {
         document.getElementById("hist-container").innerHTML =
@@ -659,6 +651,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initNav();
   if (sessionStorage.getItem("password") === CONFIG.PASSWORD) {
     showScreen("screen-credits");
+    api({action:"getCustomers"}).then(r => { CUSTOMERS = r.customers || {}; }).catch(()=>{});
     initCredits();
   }
 });
