@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
@@ -20,7 +20,7 @@
   --nav-h:54px;--r:10px;--r-sm:7px;
 }
 html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(--text);
-  font-family:'Barlow',system-ui,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased}
+  font-family:'Barlow',system-ui,sans-serif;font-size:15px;-webkit-font-smoothing:antialiased;direction:rtl}
 .screen{display:none;flex-direction:column;width:100%;height:100%;background:var(--bg)}
 .screen.active{display:flex;animation:fadeIn .18s ease}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
@@ -70,7 +70,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
 .account-input{width:100px;padding:7px 10px;background:var(--surf3);
   border:1.5px solid var(--border2);border-radius:var(--r-sm);color:var(--text);
   font-family:'Barlow Condensed',sans-serif;font-size:1.35rem;font-weight:700;
-  outline:none;transition:border-color .15s}
+  outline:none;transition:border-color .15s;direction:ltr;text-align:center}
 .account-input:focus{border-color:var(--gold)}
 .customer-name-area{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center;gap:2px}
 .cust-found{font-family:'Barlow Condensed',sans-serif;font-size:1.2rem;font-weight:700;
@@ -121,18 +121,24 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
 .hist-search{flex-shrink:0;padding:10px 12px;background:var(--surf);border-bottom:1px solid var(--border)}
 .hist-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
 .hist-container{padding:10px}
-.hist-tbl{width:100%;border-collapse:collapse}
-.hist-tbl th{padding:8px;text-align:left;font-size:.65rem;font-weight:700;
-  letter-spacing:.1em;text-transform:uppercase;color:var(--text3);
-  border-bottom:1px solid var(--border2)}
-.hist-tbl td{padding:11px 8px;border-bottom:1px solid var(--border);font-size:.88rem}
-.hist-tbl tr:last-child td{border-bottom:none}
 .hist-summary{flex-shrink:0;padding:10px 12px;background:var(--surf);
   border-top:1px solid var(--border);display:flex;justify-content:space-between;align-items:center}
 .hist-summary-label{font-size:.75rem;color:var(--text2)}
 .hist-summary-val{font-family:'Barlow Condensed',sans-serif;font-size:1.1rem;font-weight:700}
-.month-badge{display:inline-block;background:var(--gold-dim);color:var(--gold);
-  border-radius:4px;padding:2px 6px;font-size:.72rem;font-weight:700;letter-spacing:.04em}
+.hist-month-group{background:var(--surf);border-radius:var(--r);
+  border:1px solid var(--border);margin-bottom:10px;overflow:hidden}
+.hist-month-header{display:flex;justify-content:space-between;align-items:center;
+  padding:9px 12px;background:var(--surf2);border-bottom:1px solid var(--border)}
+.hist-month-name{font-size:.78rem;font-weight:700;color:var(--gold);letter-spacing:.04em}
+.hist-month-stats{font-size:.75rem;color:var(--text2)}
+.hist-row{display:flex;justify-content:space-between;align-items:center;
+  padding:11px 12px;border-bottom:1px solid var(--border)}
+.hist-row:last-child{border-bottom:none}
+.hist-tix-badge{font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;color:var(--text)}
+.hist-row-right{display:flex;align-items:center;gap:14px;direction:ltr}
+.hist-amount{color:var(--gold);font-weight:600;font-size:.9rem}
+.hist-row-date{color:var(--text3);font-size:.78rem}
+.ltr{direction:ltr;unicode-bidi:embed}
 
 /* BILLS TABLE SCREEN */
 #screen-table{overflow:hidden}
@@ -169,12 +175,12 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   <div class="login-wrap">
     <div>
       <span class="logo-mark">TABS</span>
-      <span class="logo-sub">Bar Management</span>
+      <span class="logo-sub">ניהול בר</span>
     </div>
     <div class="login-form">
-      <input id="login-password" type="password" placeholder="Enter password" autocomplete="off" />
-      <button id="login-btn">ENTER</button>
-      <p id="login-error" class="login-error">Incorrect password — try again</p>
+      <input id="login-password" type="password" placeholder="הכנס סיסמה" autocomplete="off" />
+      <button id="login-btn">כניסה</button>
+      <p id="login-error" class="login-error">סיסמה שגויה — נסה שוב</p>
     </div>
   </div>
 </div>
@@ -184,48 +190,48 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   <nav class="app-nav">
     <button class="nav-btn active" data-target="screen-credits">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Credits
+      טעינה
     </button>
     <button class="nav-btn" data-target="screen-table">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-      Bills
+      דוחות
     </button>
     <button class="nav-btn" data-target="screen-history">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      Lookup
+      חיפוש
     </button>
   </nav>
   <div class="account-bar">
     <div class="account-row">
       <div class="account-field">
-        <label class="field-label">Account #</label>
+        <label class="field-label">חשבון</label>
         <input id="cred-account" type="tel" placeholder="—" autocomplete="off" class="account-input" />
       </div>
       <div class="customer-name-area" id="cred-customer-display">
-        <span class="cust-placeholder">Enter an account number</span>
+        <span class="cust-placeholder">הכנס מספר חשבון</span>
       </div>
     </div>
     <div class="new-customer-row hidden" id="cred-new-customer-row">
-      <input id="cred-new-name" type="text" placeholder="Customer name (new — will be saved)" class="new-name-input" />
+      <input id="cred-new-name" type="text" placeholder="שם לקוח (חדש — יישמר)" class="new-name-input" />
     </div>
   </div>
   <div class="credits-body">
     <div class="credits-section">
-      <div class="credits-section-label">Select Package</div>
+      <div class="credits-section-label">בחר חבילה</div>
       <div class="pkg-grid">
         <button class="pkg-btn" data-tickets="5" data-amount="30" onclick="selectPkg(this)">
           <span class="pkg-tickets">5</span>
-          <span class="pkg-unit">tickets</span>
+          <span class="pkg-unit">כרטיסים</span>
           <span class="pkg-price">₪30</span>
         </button>
         <button class="pkg-btn" data-tickets="10" data-amount="50" onclick="selectPkg(this)">
           <span class="pkg-tickets">10</span>
-          <span class="pkg-unit">tickets</span>
+          <span class="pkg-unit">כרטיסים</span>
           <span class="pkg-price">₪50</span>
         </button>
       </div>
     </div>
-    <button id="cred-submit" class="credits-submit-btn">Load Credits</button>
+    <button id="cred-submit" class="credits-submit-btn">טעינת קרדיטים</button>
     <div id="cred-feedback" class="bill-feedback hidden" style="margin-top:8px"></div>
   </div>
 </div>
@@ -235,20 +241,20 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   <nav class="app-nav">
     <button class="nav-btn" data-target="screen-credits">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Credits
+      טעינה
     </button>
     <button class="nav-btn active" data-target="screen-table">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-      Bills
+      דוחות
     </button>
     <button class="nav-btn" data-target="screen-history">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      Lookup
+      חיפוש
     </button>
   </nav>
   <div class="table-controls">
     <select id="month-selector" class="month-select"></select>
-    <a id="open-sheet" href="#" target="_blank" class="tbl-btn">Sheets ↗</a>
+    <a id="open-sheet" href="#" target="_blank" class="tbl-btn">גיליון ↗</a>
   </div>
   <div class="bills-scroll">
     <div id="bills-table-container" class="bills-container">
@@ -256,7 +262,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
     </div>
   </div>
   <div class="tbl-summary">
-    <span class="tbl-summary-label">Total tickets this month</span>
+    <span class="tbl-summary-label">סה״כ כרטיסים החודש</span>
     <span class="tbl-summary-val" id="tbl-total">—</span>
   </div>
 </div>
@@ -266,36 +272,36 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   <nav class="app-nav">
     <button class="nav-btn" data-target="screen-credits">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      Credits
+      טעינה
     </button>
     <button class="nav-btn" data-target="screen-table">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></svg>
-      Bills
+      דוחות
     </button>
     <button class="nav-btn active" data-target="screen-history">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-      Lookup
+      חיפוש
     </button>
   </nav>
   <div class="hist-search">
     <div class="account-row">
       <div class="account-field">
-        <label class="field-label">Account #</label>
+        <label class="field-label">חשבון</label>
         <input id="hist-account" type="tel" placeholder="—" autocomplete="off" class="account-input" />
       </div>
       <div class="customer-name-area" id="hist-customer-display">
-        <span class="cust-placeholder">Enter an account number</span>
+        <span class="cust-placeholder">הכנס מספר חשבון</span>
       </div>
     </div>
     <div class="new-customer-row hidden" id="hist-new-customer-row"></div>
   </div>
   <div class="hist-scroll">
     <div id="hist-container" class="hist-container">
-      <p class="tbl-msg">Enter an account number to see purchase history.</p>
+      <p class="tbl-msg">הכנס מספר חשבון לצפיית היסטוריית רכישות.</p>
     </div>
   </div>
   <div class="hist-summary">
-    <span class="hist-summary-label">Total tickets purchased</span>
+    <span class="hist-summary-label">סה״כ כרטיסים שנרכשו</span>
     <span class="hist-summary-val" id="hist-total">—</span>
   </div>
 </div>
@@ -371,23 +377,22 @@ async function lookup(account, displayId, newRowId) {
     newRow.classList.add("hidden");
     return;
   }
-  display.innerHTML = '<span class="cust-loading">Looking up…</span>';
+  display.innerHTML = '<span class="cust-loading">מחפש…</span>';
   try {
     const r = await api({action:"lookup", account});
     if (r.found) {
       const total = r.totalCredits ?? 0;
       const bal   = r.balance ?? 0;
-      const balClass = bal > 5 ? "ok" : bal > 0 ? "low" : "zero";
       display.innerHTML = `
         <span class="cust-found">${r.name}</span>
-        <span class="cust-balance ${balClass}">${total} bought · ${bal} remaining</span>`;
+        <span class="cust-balance ok">${total} כרטיסים נרכשו</span>`;
       newRow.classList.add("hidden");
     } else {
-      display.innerHTML = '<span class="cust-not-found">Account not found</span>';
+      display.innerHTML = '<span class="cust-not-found">חשבון לא נמצא</span>';
       newRow.classList.remove("hidden");
     }
   } catch {
-    display.innerHTML = '<span class="cust-not-found">Lookup failed</span>';
+    display.innerHTML = '<span class="cust-not-found">שגיאת חיפוש</span>';
   }
 }
 
@@ -414,31 +419,31 @@ async function submitCredits() {
   const isNew   = !document.getElementById("cred-new-customer-row").classList.contains("hidden");
   const fb      = document.getElementById("cred-feedback");
 
-  if (!account)          return showFeedback(fb, "Please enter an account number.", "error");
-  if (!selectedPkgEl)    return showFeedback(fb, "Select a package first.", "error");
-  if (isNew && !newName) return showFeedback(fb, "Enter the customer name to add them.", "error");
+  if (!account)          return showFeedback(fb, "נא להכניס מספר חשבון.", "error");
+  if (!selectedPkgEl)    return showFeedback(fb, "בחר חבילה תחילה.", "error");
+  if (isNew && !newName) return showFeedback(fb, "הכנס שם לקוח להוספתו.", "error");
 
   const tickets = parseInt(selectedPkgEl.dataset.tickets);
   const amount  = parseFloat(selectedPkgEl.dataset.amount);
 
   const btn = document.getElementById("cred-submit");
-  btn.disabled = true; btn.textContent = "Loading…";
+  btn.disabled = true; btn.textContent = "טוען…";
 
   try {
     if (isNew) await api({action:"addAndBill", account, amount:0, desc:"New customer", name:newName});
     await api({action:"addCredits", account, name:newName, tickets, shekelAmount:amount});
-    showFeedback(fb, `✓ ${tickets} tickets added (₪${amount})`, "success");
+    showFeedback(fb, `✓ נטענו ${tickets} כרטיסים (₪${amount})`, "success");
     document.getElementById("cred-account").value = "";
     document.getElementById("cred-new-name").value = "";
-    document.getElementById("cred-customer-display").innerHTML = '<span class="cust-placeholder">Enter an account number</span>';
+    document.getElementById("cred-customer-display").innerHTML = '<span class="cust-placeholder">הכנס מספר חשבון</span>';
     document.getElementById("cred-new-customer-row").classList.add("hidden");
     document.querySelectorAll(".pkg-btn").forEach(b => b.classList.remove("selected"));
     selectedPkgEl = null;
     tableReady = false;
   } catch(err) {
-    showFeedback(fb, "Error: " + err.message, "error");
+    showFeedback(fb, "שגיאה: " + err.message, "error");
   } finally {
-    btn.disabled = false; btn.textContent = "Load Credits";
+    btn.disabled = false; btn.textContent = "טעינת קרדיטים";
   }
 }
 
@@ -462,7 +467,7 @@ async function loadMonths() {
   sel.innerHTML = "";
   try {
     const {months} = await api({action:"getMonths"});
-    if (!months.length) { sel.innerHTML = '<option value="">No data yet</option>'; return; }
+    if (!months.length) { sel.innerHTML = '<option value="">אין נתונים עדיין</option>'; return; }
     months.forEach(m => {
       const o = document.createElement("option");
       o.value = m; o.textContent = fmtMonth(m); sel.appendChild(o);
@@ -470,30 +475,30 @@ async function loadMonths() {
     currentMonth = months[0];
     document.getElementById("open-sheet").href =
       `https://docs.google.com/spreadsheets/d/${CONFIG.SHEET_ID}/edit`;
-  } catch { sel.innerHTML = '<option value="">Error loading</option>'; }
+  } catch { sel.innerHTML = '<option value="">שגיאה בטעינה</option>'; }
 }
 
 function fmtMonth(key) {
   const [y,m] = key.split("_");
-  return new Date(+y, +m-1, 1).toLocaleString("default", {month:"long", year:"numeric"});
+  return new Date(+y, +m-1, 1).toLocaleString("he-IL", {month:"long", year:"numeric"});
 }
 
 async function loadTable(month) {
   currentMonth = month;
   const box = document.getElementById("bills-table-container");
-  box.innerHTML = '<p class="tbl-msg">Loading…</p>';
+  box.innerHTML = '<p class="tbl-msg">טוען…</p>';
   document.getElementById("tbl-total").textContent = "—";
   try {
     const {credits} = await api({action:"getCredits", month});
     renderTable(credits);
   } catch(err) {
-    box.innerHTML = `<p class="tbl-msg" style="color:var(--red)">Failed: ${err.message}</p>`;
+    box.innerHTML = `<p class="tbl-msg" style="color:var(--red)">שגיאה: ${err.message}</p>`;
   }
 }
 
 function renderTable(credits) {
   const box = document.getElementById("bills-table-container");
-  if (!credits.length) { box.innerHTML = '<p class="tbl-msg">No credits loaded this month.</p>'; return; }
+  if (!credits.length) { box.innerHTML = '<p class="tbl-msg">אין קרדיטים לחודש זה.</p>'; return; }
 
   // Group by account, sum tickets
   const groups = {};
@@ -504,12 +509,12 @@ function renderTable(credits) {
   });
 
   const totalTix = Object.values(groups).reduce((s, g) => s + g.tickets, 0);
-  document.getElementById("tbl-total").textContent = totalTix + " tix";
+  document.getElementById("tbl-total").textContent = totalTix + " כרטיסים";
 
   const tbl = document.createElement("table");
   tbl.className = "bills-tbl";
   tbl.innerHTML = `<thead><tr>
-    <th>Acct</th><th>Name</th><th>Tickets</th><th>Paid</th>
+    <th>חשבון</th><th>שם</th><th>כרטיסים</th><th>שולם</th>
   </tr></thead>`;
   const tbody = document.createElement("tbody");
 
@@ -555,50 +560,69 @@ function initHistory() {
 
 async function loadPersonHistory(account) {
   const box = document.getElementById("hist-container");
-  box.innerHTML = '<p class="tbl-msg">Loading…</p>';
+  box.innerHTML = '<p class="tbl-msg">טוען…</p>';
   document.getElementById("hist-total").textContent = "—";
   try {
     const {history} = await api({action:"getPersonHistory", account});
     renderHistory(history);
   } catch(err) {
-    box.innerHTML = `<p class="tbl-msg" style="color:var(--red)">Failed: ${err.message}</p>`;
+    box.innerHTML = `<p class="tbl-msg" style="color:var(--red)">שגיאה: ${err.message}</p>`;
   }
 }
 
 function renderHistory(history) {
   const box = document.getElementById("hist-container");
   if (!history.length) {
-    box.innerHTML = '<p class="tbl-msg">No purchases found for this account.</p>';
-    document.getElementById("hist-total").textContent = "0 tix";
+    box.innerHTML = '<p class="tbl-msg">לא נמצאו רכישות לחשבון זה.</p>';
+    document.getElementById("hist-total").textContent = "0 כרטיסים";
     return;
   }
 
-  const totalTix = history.reduce((s, h) => s + (parseInt(h.tickets) || 0), 0);
+  const totalTix  = history.reduce((s, h) => s + (parseInt(h.tickets)  || 0), 0);
   const totalPaid = history.reduce((s, h) => s + (parseFloat(h.amount) || 0), 0);
-  document.getElementById("hist-total").textContent =
-    `${totalTix} tix · ₪${totalPaid.toFixed(0)}`;
+  document.getElementById("hist-total").textContent = `${totalTix} כרטיסים · ₪${totalPaid.toFixed(0)}`;
 
-  const tbl = document.createElement("table");
-  tbl.className = "hist-tbl";
-  tbl.innerHTML = `<thead><tr>
-    <th>Month</th><th>Tickets</th><th>Paid</th><th>Date</th>
-  </tr></thead>`;
-  const tbody = document.createElement("tbody");
-
+  // Group by month, preserving newest-first order
+  const months = [], monthMap = {};
   history.forEach(h => {
-    const tr = document.createElement("tr");
-    const dtStr = h.datetime ? new Date(h.datetime).toLocaleDateString("he-IL", {day:"2-digit",month:"2-digit",year:"2-digit"}) : "";
-    tr.innerHTML = `
-      <td><span class="month-badge">${fmtMonth(h.month)}</span></td>
-      <td><span class="tix-total">${h.tickets}</span></td>
-      <td style="color:var(--text2)">₪${parseFloat(h.amount||0).toFixed(0)}</td>
-      <td style="color:var(--text3);font-size:.8rem">${dtStr}</td>`;
-    tbody.appendChild(tr);
+    if (!monthMap[h.month]) { monthMap[h.month] = []; months.push(h.month); }
+    monthMap[h.month].push(h);
   });
 
-  tbl.appendChild(tbody);
+  const frag = document.createDocumentFragment();
+  months.forEach(month => {
+    const mTix  = monthMap[month].reduce((s, h) => s + (parseInt(h.tickets)  || 0), 0);
+    const mPaid = monthMap[month].reduce((s, h) => s + (parseFloat(h.amount) || 0), 0);
+
+    const group = document.createElement("div");
+    group.className = "hist-month-group";
+
+    const header = document.createElement("div");
+    header.className = "hist-month-header";
+    header.innerHTML = `<span class="hist-month-name">${fmtMonth(month)}</span>
+      <span class="hist-month-stats">${mTix} כרטיסים · ₪${mPaid.toFixed(0)}</span>`;
+    group.appendChild(header);
+
+    monthMap[month].forEach(h => {
+      const dtStr = h.datetime
+        ? new Date(h.datetime).toLocaleDateString("he-IL", {day:"2-digit", month:"2-digit", year:"2-digit"})
+        : "";
+      const row = document.createElement("div");
+      row.className = "hist-row";
+      row.innerHTML = `
+        <span class="hist-tix-badge">${h.tickets} כרטיסים</span>
+        <div class="hist-row-right">
+          <span class="hist-amount">₪${parseFloat(h.amount||0).toFixed(0)}</span>
+          <span class="hist-row-date">${dtStr}</span>
+        </div>`;
+      group.appendChild(row);
+    });
+
+    frag.appendChild(group);
+  });
+
   box.innerHTML = "";
-  box.appendChild(tbl);
+  box.appendChild(frag);
 }
 
 // ── BOOT ──────────────────────────────────────────────────
