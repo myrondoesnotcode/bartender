@@ -22,8 +22,9 @@ function handle(e) {
       case "getBills":    return json(getBills(p.month));
       case "getMonths":   return json(getMonths());
       case "addCredits":  return json(addCredits(p.account, p.name, p.tickets, p.shekelAmount));
-      case "getCredits":  return json(getCredits(p.month));
-      case "voidBill":    return json(voidBill(p.account, p.name, p.tickets, p.desc));
+      case "getCredits":       return json(getCredits(p.month));
+      case "getPersonHistory": return json(getPersonHistory(p.account));
+      case "voidBill":         return json(voidBill(p.account, p.name, p.tickets, p.desc));
       default:            return json({ error: "Unknown action" });
     }
   } catch (err) {
@@ -101,6 +102,28 @@ function getCredits(month) {
   if (!sheet) return { credits: [] };
   const data = sheet.getDataRange().getValues();
   return { credits: data.slice(1).map(row => ({ account: row[0], name: row[1], tickets: row[2], amount: row[3], datetime: row[4] })) };
+}
+
+// ============================================================
+// PERSON HISTORY — all credit purchases across all months
+// ============================================================
+function getPersonHistory(account) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  const rows = [];
+  ss.getSheets().forEach(function(s) {
+    const name = s.getName();
+    if (!name.startsWith("Credits_")) return;
+    const month = name.replace("Credits_", "");
+    const data = s.getDataRange().getValues();
+    data.slice(1).forEach(function(row) {
+      if (String(row[0]) === String(account)) {
+        rows.push({ month: month, account: row[0], name: row[1],
+                    tickets: row[2], amount: row[3], datetime: row[4] });
+      }
+    });
+  });
+  rows.sort(function(a, b) { return new Date(b.datetime) - new Date(a.datetime); });
+  return { history: rows };
 }
 
 // ============================================================
