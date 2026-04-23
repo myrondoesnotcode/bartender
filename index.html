@@ -30,9 +30,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   background:radial-gradient(ellipse at 50% 35%,#fff8ee 0%,var(--bg) 70%)}
 .login-wrap{width:100%;max-width:300px;padding:2rem 1.5rem;
   display:flex;flex-direction:column;align-items:center;gap:2.5rem}
-.logo-mark{display:block;font-family:'Barlow Condensed',sans-serif;
-  font-size:6rem;font-weight:800;letter-spacing:.1em;line-height:1;color:var(--gold);
-  text-shadow:0 2px 20px var(--gold-glow)}
+.logo-img{width:220px;height:auto;display:block}
 .logo-sub{display:block;margin-top:4px;font-size:.68rem;letter-spacing:.35em;
   text-transform:uppercase;color:var(--text3)}
 .login-form{width:100%;display:flex;flex-direction:column;gap:.7rem}
@@ -179,8 +177,7 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
 <div class="screen active" id="screen-login">
   <div class="login-wrap">
     <div>
-      <span class="logo-mark">TABS</span>
-      <span class="logo-sub">ניהול בר</span>
+      <img src="logo.jpeg" class="logo-img" alt="ברפת" />
     </div>
     <div class="login-form">
       <input id="login-password" type="password" placeholder="הכנס סיסמה" autocomplete="off" />
@@ -259,6 +256,9 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
   </nav>
   <div class="table-controls">
     <select id="month-selector" class="month-select"></select>
+    <button id="refresh-btn" class="tbl-btn" title="רענן">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" width="15" height="15"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+    </button>
     <a id="open-sheet" href="#" target="_blank" class="tbl-btn">גיליון ↗</a>
   </div>
   <div class="bills-scroll">
@@ -465,6 +465,10 @@ async function initTable() {
   await loadMonths();
   if (currentMonth) await loadTable(currentMonth);
   document.getElementById("month-selector").addEventListener("change", e => loadTable(e.target.value));
+  document.getElementById("refresh-btn").addEventListener("click", async () => {
+    tableReady = false;
+    await initTable();
+  });
 }
 
 async function loadMonths() {
