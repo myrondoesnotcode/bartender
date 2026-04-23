@@ -139,6 +139,11 @@ html,body{height:100%;width:100%;overflow:hidden;background:var(--bg);color:var(
 .hist-amount{color:var(--gold);font-weight:600;font-size:.9rem}
 .hist-row-date{color:var(--text3);font-size:.78rem}
 .ltr{direction:ltr;unicode-bidi:embed}
+.delete-btn{background:none;border:none;width:auto;padding:4px 6px;margin:0;
+  color:var(--text3);cursor:pointer;border-radius:6px;line-height:1;font-size:1rem;
+  transition:color .15s,background .15s}
+.delete-btn:hover{color:var(--red);background:var(--red-dim)}
+.delete-btn:active{opacity:.7}
 
 /* BILLS TABLE SCREEN */
 #screen-table{overflow:hidden}
@@ -542,6 +547,22 @@ let histLookupTimer = null;
 function initHistory() {
   if (historyReady) return;
   historyReady = true;
+
+  // Delete button — event delegation
+  document.getElementById("hist-container").addEventListener("click", async e => {
+    const btn = e.target.closest(".delete-btn");
+    if (!btn) return;
+    if (!confirm("למחוק רכישה זו?")) return;
+    btn.disabled = true; btn.textContent = "…";
+    try {
+      await api({action:"deleteCredit", account:btn.dataset.account, datetime:btn.dataset.datetime});
+      await loadPersonHistory(btn.dataset.account);
+    } catch(err) {
+      btn.disabled = false; btn.textContent = "🗑";
+      alert("שגיאה: " + err.message);
+    }
+  });
+
   const input = document.getElementById("hist-account");
   input.addEventListener("input", e => {
     clearTimeout(histLookupTimer);
@@ -614,6 +635,7 @@ function renderHistory(history) {
         <div class="hist-row-right">
           <span class="hist-amount">₪${parseFloat(h.amount||0).toFixed(0)}</span>
           <span class="hist-row-date">${dtStr}</span>
+          <button class="delete-btn" title="מחק רכישה" data-account="${h.account}" data-datetime="${h.datetime}">🗑</button>
         </div>`;
       group.appendChild(row);
     });

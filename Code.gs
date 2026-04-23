@@ -24,6 +24,7 @@ function handle(e) {
       case "addCredits":  return json(addCredits(p.account, p.name, p.tickets, p.shekelAmount));
       case "getCredits":       return json(getCredits(p.month));
       case "getPersonHistory": return json(getPersonHistory(p.account));
+      case "deleteCredit":     return json(deleteCredit(p.account, p.datetime));
       case "voidBill":         return json(voidBill(p.account, p.name, p.tickets, p.desc));
       default:            return json({ error: "Unknown action" });
     }
@@ -124,6 +125,27 @@ function getPersonHistory(account) {
   });
   rows.sort(function(a, b) { return new Date(b.datetime) - new Date(a.datetime); });
   return { history: rows };
+}
+
+// ============================================================
+// DELETE A CREDIT ROW (by account + datetime)
+// ============================================================
+function deleteCredit(account, datetime) {
+  const ss = SpreadsheetApp.openById(SHEET_ID);
+  var deleted = false;
+  ss.getSheets().forEach(function(s) {
+    if (!s.getName().startsWith("Credits_")) return;
+    var data = s.getDataRange().getValues();
+    for (var i = data.length - 1; i >= 1; i--) {
+      if (String(data[i][0]) === String(account) &&
+          String(data[i][4]) === String(datetime)) {
+        s.deleteRow(i + 1); // +1 because Sheets rows are 1-indexed
+        deleted = true;
+        return;
+      }
+    }
+  });
+  return { success: deleted };
 }
 
 // ============================================================
